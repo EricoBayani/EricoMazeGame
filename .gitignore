@@ -1,0 +1,7 @@
+*.git
+bin/
+linklib/
+build/
+*.code-workspace
+*.zip
+*Notes.md
