@@ -104,21 +104,21 @@ struct hgeColor32 {
     }
 };
 
-// Legacy macros became functions and now delegate work to the hgeColor32 class
-static hgeColor32 ARGB(uint8_t a, uint8_t r, uint8_t g, uint8_t b) { return {a, r, g, b}; }
-
-static uint8_t GETA(const hgeColor32 col) { return col.get_a(); }
-
-static uint8_t GETR(const hgeColor32 col) { return col.get_r(); }
-
-static uint8_t GETG(const hgeColor32 col) { return col.get_g(); }
-
-static uint8_t GETB(const hgeColor32 col) { return col.get_b(); }
-
-static hgeColor32 SETA(hgeColor32 col, const uint8_t a) { return col.set_a(a); }
-
-static hgeColor32 SETR(hgeColor32 col, const uint8_t r) { return col.set_r(r); }
-
-static hgeColor32 SETG(hgeColor32 col, const uint8_t g) { return col.set_g(g); }
-
-static hgeColor32 SETB(hgeColor32 col, const uint8_t b) { return col.set_b(b); }
+//// Legacy macros became functions and now delegate work to the hgeColor32 class
+//static hgeColor32 ARGB(uint8_t a, uint8_t r, uint8_t g, uint8_t b) { return {a, r, g, b}; }
+//
+//static uint8_t GETA(const hgeColor32 col) { return col.get_a(); }
+//
+//static uint8_t GETR(const hgeColor32 col) { return col.get_r(); }
+//
+//static uint8_t GETG(const hgeColor32 col) { return col.get_g(); }
+//
+//static uint8_t GETB(const hgeColor32 col) { return col.get_b(); }
+//
+//static hgeColor32 SETA(hgeColor32 col, const uint8_t a) { return col.set_a(a); }
+//
+//static hgeColor32 SETR(hgeColor32 col, const uint8_t r) { return col.set_r(r); }
+//
+//static hgeColor32 SETG(hgeColor32 col, const uint8_t g) { return col.set_g(g); }
+//
+//static hgeColor32 SETB(hgeColor32 col, const uint8_t b) { return col.set_b(b); }

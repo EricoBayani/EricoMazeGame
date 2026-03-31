@@ -60,7 +60,7 @@ namespace hgeImpl {
     }
 
 // NOLINTNEXTLINE
-    void *HGE_CALL HGE_Impl::Resource_Load(const char *filename, uint32_t *size) {
+    void *HGE_CALL HGE_Impl::Resource_Load(const char *filename, size_t *size) {
       static const char *res_err = "Can't load resource: %s";
 
       char sz_name[_MAX_PATH];

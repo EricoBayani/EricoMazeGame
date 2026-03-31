@@ -29,7 +29,8 @@ protected:
 
     std::string name;
     int resgroup{};
-    uint32_t handle{};
+    uintptr_t handle {};
+
     ResDesc *next{};
 
 public:
@@ -41,7 +42,7 @@ public:
       hge_->Release();
     }
 
-    virtual uint32_t Get(hgeResourceManager *rm) = 0;
+    virtual uintptr_t Get( hgeResourceManager *rm ) = 0;
 
     virtual void Free() = 0;
 

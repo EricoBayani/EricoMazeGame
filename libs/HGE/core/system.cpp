@@ -272,6 +272,9 @@ bool HGE_CALL HGE_Impl::System_Start()
 
     // MAIN LOOP
 
+    // double accumulator = 0.0;
+    // double fixedDeltaTime = static_cast<double>( fixed_delta_ / 1000.0 );
+
     for ( ;; )
     {
 
@@ -306,7 +309,7 @@ bool HGE_CALL HGE_Impl::System_Start()
             do
             {
                 dt_ = timeGetTime() - t0_;
-            } while ( dt_ < 1);
+            } while ( dt_ < 1 );
             // If we reached the time for the next frame
             // or we just run in unlimited FPS mode, then
             // do the stuff
@@ -345,6 +348,35 @@ bool HGE_CALL HGE_Impl::System_Start()
                 }
 
                 // Do user's stuff
+
+                /*               bool quit = false;
+
+                               if ( fixed_delta_ )
+                               {
+                                   double frameTime = static_cast<double>( delta_time_ );
+                                   accumulator += frameTime;
+                                   while ( accumulator >= fixedDeltaTime )
+                                   {
+                                       if ( proc_frame_func_() )
+                                       {
+                                           quit = true;
+                                           break;
+                                       }
+                                       accumulator -= fixedDeltaTime;
+                                   }
+                               }
+
+                               else
+                               {
+                                   if ( proc_frame_func_() )
+                                   {
+                                       break;
+                                   }
+                               }
+                               if ( quit )
+                               {
+                                   break;
+                               }*/
 
                 if ( proc_frame_func_() )
                 {
@@ -626,8 +658,7 @@ void HGE_CALL HGE_Impl::System_SetStateInt( const hgeIntState state, const int v
         hgefps_ = value;
         if ( hgefps_ > 0 )
         {
-            fixed_delta_ = int(1000.0f / (float) value );
-
+            fixed_delta_ = int( 1000.0f / (float) value );
         }
         else
         {

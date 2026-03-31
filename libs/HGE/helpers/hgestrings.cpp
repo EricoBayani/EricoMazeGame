@@ -23,7 +23,7 @@ HGE *hgeStringTable::hge_ = nullptr;
 
 
 hgeStringTable::hgeStringTable(const char *filename) {
-  uint32_t size;
+  size_t size;
   char str_name[MAXSTRNAMELENGTH];
 
   hge_ = hgeCreate(HGE_VERSION);

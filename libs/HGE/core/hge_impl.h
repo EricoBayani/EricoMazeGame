@@ -120,7 +120,7 @@ class HGE_Impl : public HGE
     void HGE_CALL System_Snapshot( const char *filename = nullptr ) override;
 
     // NOLINTNEXTLINE
-    void *HGE_CALL Resource_Load( const char *filename, uint32_t *size = nullptr ) override;
+    void *HGE_CALL Resource_Load( const char *filename, size_t *size = nullptr ) override;
 
     void HGE_CALL Resource_Free( void *res ) override;
 

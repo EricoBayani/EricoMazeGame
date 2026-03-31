@@ -49,7 +49,8 @@ target_include_directories(hge  PRIVATE ${HGE_INCLUDE_DIR}
 #------ link directories listed ------
 
 
-target_link_libraries(hge winmm zlib ${DIRECTX_SDK_DIR}/Lib/x86/d3dx9.lib ${DIRECTX_SDK_DIR}/Lib/x86/d3d9.lib)
+# target_link_libraries(hge winmm zlib ${DIRECTX_SDK_DIR}/Lib/x86/d3dx9.lib ${DIRECTX_SDK_DIR}/Lib/x86/d3d9.lib)
+target_link_libraries(hge PRIVATE winmm zlib ${DIRECTX_SDK_DIR}/Lib/x64/d3dx9.lib ${DIRECTX_SDK_DIR}/Lib/x64/d3d9.lib)
 
 add_dependencies(hge hgehelpers imgui zlib)
 

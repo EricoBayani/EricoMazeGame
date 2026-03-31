@@ -22,8 +22,15 @@ MyGame *MyGame::GetGame()
 
 bool MyGame::FrameFunc()
 {
+    bool quit = false;
+    GetGame()->accumulatedDeltaTime += static_cast<float>( GetGame()->m_hge->Timer_GetDelta() );
+    if (GetGame()->accumulatedDeltaTime >= GetGame()->fixedTargetDeltaTime)
+    {
+        quit = GetGame()->m_state->Think();
+        GetGame()->accumulatedDeltaTime = 0.0f;
 
-    return GetGame()->m_state->Think();
+    }
+    return quit;
 }
 
 bool MyGame::RenderFunc()
@@ -50,8 +57,8 @@ bool MyGame::Startup()
     m_hge = hgeCreate( HGE_VERSION );
 
     m_hge->System_SetState( HGE_SHOWSPLASH, false );
-    m_hge->System_SetState( HGE_FPS, 60 );
-     //m_hge->System_SetState( HGE_FPS, HGEFPS_VSYNC );
+    //m_hge->System_SetState( HGE_FPS, 60 );
+     m_hge->System_SetState( HGE_FPS, HGEFPS_VSYNC );
     // m_hge->System_SetState( HGE_FPS, HGEFPS_UNLIMITED );
     m_hge->System_SetState( HGE_LOGFILE, "MazeGame.log" );
     m_hge->System_SetState( HGE_FRAMEFUNC, FrameFunc );
@@ -71,11 +78,11 @@ bool MyGame::Startup()
     if ( !m_hge->System_Initiate() )
         return false;
 
+    SetupImGui();
 
     m_font = new hgeFont( "font1.fnt" );
 
 
-    SetupImGui();
 
 
     m_state_play = new GameState_Play();

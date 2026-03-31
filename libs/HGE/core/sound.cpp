@@ -22,7 +22,7 @@ namespace hgeImpl {
 // NOLINTNEXTLINE
     HEFFECT HGE_CALL HGE_Impl::Effect_Load(const char *filename,
                                            const uint32_t size) {
-      uint32_t size_1;
+      size_t size_1;
       BASS_CHANNELINFO info;
       void *data;
 
@@ -115,7 +115,7 @@ namespace hgeImpl {
     HMUSIC HGE_CALL HGE_Impl::Music_Load(
             const char *filename, const uint32_t size) {
       void *data;
-      uint32_t size_1;
+      size_t size_1;
 
       if (!hBass) return 0;
       if (size) {
@@ -232,7 +232,7 @@ namespace hgeImpl {
     HSTREAM HGE_CALL HGE_Impl::Stream_Load(
             const char *filename, const uint32_t size) {
       void *data;
-      uint32_t _size;
+      size_t _size;
 
       if (!hBass) return 0;
       if (is_silent_) {

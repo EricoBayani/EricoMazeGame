@@ -37,7 +37,8 @@ struct RScript : public ResDesc {
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override {
+    uintptr_t Get( hgeResourceManager *rm ) override
+    {
       return 0;
     }
 
@@ -57,7 +58,7 @@ public:
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get( hgeResourceManager *rm ) override;
 
     void Free() override;
 };
@@ -73,7 +74,7 @@ public:
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get( hgeResourceManager *rm ) override;
 
     void Free() override;
 };
@@ -88,7 +89,7 @@ public:
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get( hgeResourceManager *rm ) override;
 
     void Free() override;
 };
@@ -104,7 +105,7 @@ public:
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get( hgeResourceManager *rm ) override;
 
     void Free() override;
 };
@@ -119,7 +120,7 @@ public:
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get( hgeResourceManager *rm ) override;
 
     void Free() override;
 };
@@ -132,7 +133,7 @@ struct RTarget : public ResDesc {
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get( hgeResourceManager *rm ) override;
 
     void Free() override;
 };
@@ -149,7 +150,7 @@ struct RSprite : public ResDesc {
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get( hgeResourceManager *rm ) override;
 
     void Free() override;
 };
@@ -162,7 +163,7 @@ struct RAnimation : public RSprite {
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get( hgeResourceManager *rm ) override;
 
     void Free() override;
 };
@@ -182,7 +183,7 @@ struct RFont : public ResDesc {
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get(hgeResourceManager *rm) override;
 
     void Free() override;
 };
@@ -194,7 +195,7 @@ struct RParticle : public ResDesc {
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get(hgeResourceManager *rm) override;
 
     void Free() override;
 };
@@ -210,7 +211,7 @@ struct RDistort : public ResDesc {
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get(hgeResourceManager *rm) override;
 
     void Free() override;
 };
@@ -226,7 +227,7 @@ public:
     static void Parse(hgeResourceManager *rm, RScriptParser *sp, const char *name,
                       const char *basename);
 
-    uint32_t Get(hgeResourceManager *rm) override;
+    uintptr_t Get(hgeResourceManager *rm) override;
 
     void Free() override;
 };

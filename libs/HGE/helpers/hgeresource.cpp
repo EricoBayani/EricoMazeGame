@@ -101,7 +101,7 @@ void *hgeResourceManager::GetResource(const char *name, const int resgroup) {
   void *reshandle = hge_->Resource_Load(name);
   if (reshandle) {
     const auto resource = new RResource();
-    resource->handle = reinterpret_cast<uint32_t>(reshandle);
+      resource->handle = reinterpret_cast<uintptr_t>( reshandle );
     resource->resgroup = resgroup;
     resource->name = name;
     resource->filename = name;
@@ -250,7 +250,7 @@ hgeStringTable *hgeResourceManager::GetStringTable(const char *name,
   }
   auto strtable = new hgeStringTable(name);
   const auto resource = new RStringTable();
-  resource->handle = reinterpret_cast<uint32_t>(strtable);
+  resource->handle = reinterpret_cast<uintptr_t>( strtable );
   resource->resgroup = resgroup;
   resource->name = name;
   resource->filename = name;

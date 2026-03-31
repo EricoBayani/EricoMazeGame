@@ -17,7 +17,7 @@ class Player;
 
 class hgeSprite;
 
-class WorldObject;
+struct WorldObject;
 
 typedef uint32_t CellType;
 typedef std::vector<WorldObject *> WorldObjectList;

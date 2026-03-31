@@ -49,23 +49,14 @@ void RenderImGuiViews()
     const DebugInfo &debugInfo = GetGlobalDebugInfo();
 
     // Draw framerate and time since previous frame
-    char debugTextBuffer[64];
-    _snprintf( debugTextBuffer, sizeof( debugTextBuffer ) - 1,
-               "dt:%.3f\nFPS:%d",
-               MyGame::GetGame()->m_hge->Timer_GetDelta(), MyGame::GetGame()->m_hge->Timer_GetFPS() );
+
     ImGui::Begin( "Dev Stuff" );
 
-    ImGui::Text( debugTextBuffer );
+    ImGui::Text( "dt:%.3f\nFPS:%d", MyGame::GetGame()->m_hge->Timer_GetDelta(), MyGame::GetGame()->m_hge->Timer_GetFPS() );
 
     ImGui::Separator();
 
-    memset( debugTextBuffer, 0, sizeof( debugTextBuffer ) );
-
-    _snprintf( debugTextBuffer, sizeof( debugTextBuffer ) - 1,
-               "Player x: %.3f\nPlayer y: %.3f\n",
-               debugInfo.playerPos.x1, debugInfo.playerPos.y1 );
-
-    ImGui::Text( debugTextBuffer );
+    ImGui::Text( "Player x: %.3f\nPlayer y: %.3f\n", debugInfo.playerPos.x1, debugInfo.playerPos.y1 );
 
     ImGui::Text( "frameDeltaSpikes: %d", debugInfo.frameDeltaSpikes );
 

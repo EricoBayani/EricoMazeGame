@@ -405,7 +405,7 @@ namespace hgeImpl {
     HTEXTURE HGE_CALL HGE_Impl::Texture_Load(const char *filename,
                                              const uint32_t size, bool bMipmap) {
       void *data;
-      uint32_t size1;
+      size_t size1;
       D3DFORMAT fmt1, fmt2;
       hgeGAPITexture *p_tex;
       D3DXIMAGE_INFO info;

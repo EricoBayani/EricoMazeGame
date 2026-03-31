@@ -111,7 +111,7 @@ WorldObject &World::WorldObjectAt( float y, float x )
 
 void World::Render()
 {
-    m_hge->Gfx_Clear( ARGB( 255, 0, 0, 0 ) );
+    m_hge->Gfx_Clear( hgeColor32( 255, 0, 0, 0 ) );
 
     // draw our terrain aka our maze
 

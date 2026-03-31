@@ -51,6 +51,7 @@ hgeRect Player::GetScreenPosition()
 void Player::HandleMovementAndCollision( float delta )
 {
 
+
     if ( m_hge->Input_GetKeyState( HGEK_RIGHT ) || m_hge->Input_GetKeyState( HGEK_D ) )
     {
         m_speed.x = 1;
@@ -144,9 +145,9 @@ void Player::Render( World *world )
     // print with white shadow
     game->m_font->SetScale( m_world->m_targetResToActualResScale );
     game->m_font->SetBlendMode( BLEND_DEFAULT_Z );
-    game->m_font->SetColor( ARGB( 255, 255, 255, 255 ) );
+    game->m_font->SetColor( hgeColor32( 255, 255, 255, 255 ) );
     game->m_font->printfb( 0, 0, screenWidth, 40, HGETEXT_RIGHT, "Lives: %d ", m_lives );
-    game->m_font->SetColor( ARGB( 255, 0, 0, 0 ) );
+    game->m_font->SetColor( hgeColor32( 255, 0, 0, 0 ) );
     game->m_font->printfb( 2, 2, screenWidth, 40, HGETEXT_RIGHT, "Lives: %d ", m_lives );
 
 
@@ -191,7 +192,8 @@ void Player::Think()
         return;
     }
 
-    float delta = m_hge->Timer_GetDelta();
+    //float delta = m_hge->Timer_GetDelta();
+    float delta = m_game->accumulatedDeltaTime;
 
     HandleMovementAndCollision( delta );
 

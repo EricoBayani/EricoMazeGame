@@ -49,4 +49,9 @@ target_link_libraries(MazeGame PRIVATE hge hgehelpers imgui)
 
 if(MSVC)
     set_target_properties(MazeGame PROPERTIES LINK_FLAGS "/NODEFAULTLIB:libci")
+    target_compile_options(hgehelpers PRIVATE /W4)
+    target_compile_options(hge PRIVATE /W4)
+    target_compile_options(imgui PRIVATE /W4)
+    target_compile_options(MazeGame PRIVATE /W4)
+
 endif()

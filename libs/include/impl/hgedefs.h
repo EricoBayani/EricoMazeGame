@@ -23,7 +23,8 @@
 #define HGE_EXPORT
 #endif
 
-#define HGE_CALL  __stdcall
+//#define HGE_CALL  __stdcall
+#define HGE_CALL
 
 #ifdef __BORLANDC__
 #define floorf (float)floor

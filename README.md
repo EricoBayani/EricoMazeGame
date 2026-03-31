@@ -4,7 +4,7 @@ Simple Maze Game Built with HGE (maybe to my detriment)
 
 ## How to Build
 
-Assuming you are on Windows and have already ran [this](https://www.microsoft.com/en-us/download/details.aspx?id=6812) to install the  Directx 9 SDK, run `cmake -B build -A Win32` to generate a Visual Studio Solution in this directory. 
+Assuming you are on Windows and have already ran [this](https://www.microsoft.com/en-us/download/details.aspx?id=6812) to install the  Directx 9 SDK, run `cmake -B build -A Win32` to generate a Visual Studio Solution in this directory. `cmake -B build -A Win32` is for x86 version of the solution. 
 
 ## How to Run
 

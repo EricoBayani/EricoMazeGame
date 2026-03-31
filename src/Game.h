@@ -1,7 +1,6 @@
 
 #pragma once
 
-// this is for standard integer types like uint32_t (very useful)
 #include <stdint.h>
 
 #include <hge.h>
@@ -20,6 +19,9 @@ class MyGame
     hgeFont *m_font;
     GameState *m_state;
     GameState *m_state_play;
+
+    float accumulatedDeltaTime = 0.0f;
+    const float fixedTargetDeltaTime = 0.016f;
 
   public:
     MyGame();

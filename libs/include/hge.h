@@ -256,7 +256,7 @@ public:
     }
 
     virtual void *HGE_CALL Resource_Load(const char *filename,
-                                         uint32_t *size = nullptr) = 0;
+                                         size_t *size = nullptr) = 0;
 
     virtual void HGE_CALL Resource_Free(void *res) = 0;
 

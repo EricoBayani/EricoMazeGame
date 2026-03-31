@@ -19,6 +19,8 @@ using HTARGET = size_t;
 using HSHADER = size_t;
 using HEFFECT = size_t;
 
+
+// Fix these when I enable sound
 using HMUSIC = uint32_t; // defined by bass.h
 using HSTREAM = uint32_t; // defined by bass.h
 using HCHANNEL = uint32_t; // defined by bass.h
