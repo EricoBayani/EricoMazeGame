@@ -48,7 +48,7 @@ void World::LoadWorld()
     {
         for ( int col = 0; col < m_worldWidth; ++col )
         {
-            m_worldCellObjects[row * m_worldWidth + col] = WorldObject( this, col * m_cellBoxHeight, row * m_cellBoxHeight );
+            m_worldCellObjects[row * m_worldWidth + col] = WorldObject( this, static_cast<float>(col * m_cellBoxHeight), static_cast<float>(row * m_cellBoxHeight) );
             if ( row <= 1 || row >= m_worldHeight - 2 ||
                  col <= 1 || col >= m_worldWidth - 2 )
             {

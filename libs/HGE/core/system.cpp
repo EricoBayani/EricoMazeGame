@@ -23,7 +23,7 @@ LRESULT CALLBACK WindowProc( HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam )
 
 namespace hgeImpl
 {
-
+// TODO: Modernize this to shared_ptr
 int nRef = 0;
 HGE_Impl *pHGE = nullptr;
 

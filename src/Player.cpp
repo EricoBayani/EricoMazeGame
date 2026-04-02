@@ -130,9 +130,39 @@ void Player::HandleMovementAndCollision( float delta )
 
 
     m_position = new_pos;
-
-    GetGlobalDebugInfo().playerPos = m_position;
+#ifdef _DEBUG
+    GetGlobalDebugInfo()->playerPos = m_position;
+#endif
 }
+
+
+void Player::Think()
+{
+    if ( m_is_dead )
+    {
+        // press ENTER when dead leads to respawn
+        if ( m_hge->Input_GetKeyState( HGEK_ENTER ) )
+        {
+            Respawn();
+        }
+        return;
+    }
+    if ( m_world->m_pauseFlag )
+    {
+        // check for pause key to unpause
+        return;
+    }
+
+    // float delta = m_hge->Timer_GetDelta();
+    float delta = m_game->accumulatedDeltaTime;
+
+    HandleMovementAndCollision( delta );
+
+    WorldObjectList touching_objects;
+
+    m_world->FindIntersectingObjects( m_position, touching_objects );
+}
+
 
 void Player::Render( World *world )
 {
@@ -171,35 +201,6 @@ void Player::Render( World *world )
     MyGame::GetGame()->m_hge->Gfx_RenderLine( pos.x2, pos.y1, pos.x2, pos.y2, hgeColor32::WHITE().argb, 1.0f );
     MyGame::GetGame()->m_hge->Gfx_RenderLine( pos.x2, pos.y2, pos.x1, pos.y2, hgeColor32::WHITE().argb, 1.0f );
     MyGame::GetGame()->m_hge->Gfx_RenderLine( pos.x1, pos.y1, pos.x1, pos.y2, hgeColor32::WHITE().argb, 1.0f );
-
-}
-
-
-void Player::Think()
-{
-    if ( m_is_dead )
-    {
-        // press ENTER when dead leads to respawn
-        if ( m_hge->Input_GetKeyState( HGEK_ENTER ) )
-        {
-            Respawn();
-        }
-        return;
-    }
-    if ( m_world->m_pauseFlag )
-    {
-        // check for pause key to unpause
-        return;
-    }
-
-    //float delta = m_hge->Timer_GetDelta();
-    float delta = m_game->accumulatedDeltaTime;
-
-    HandleMovementAndCollision( delta );
-
-    WorldObjectList touching_objects;
-
-    m_world->FindIntersectingObjects( m_position, touching_objects );
 
 }
 

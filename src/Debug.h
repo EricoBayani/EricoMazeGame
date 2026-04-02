@@ -2,20 +2,27 @@
 
 #include "Game.h"
 
+
+#ifdef _DEBUG
+
+
 // Fill this up before imgui prints it
 struct DebugInfo
 {
     hgeRect playerPos;
-    int frameDeltaSpikes;
+    int frameDeltaSpikes = 0;
+    bool fogEnabled = true;
 };
 
 static DebugInfo g_DebugInfo;
 
-inline DebugInfo &GetGlobalDebugInfo()
+inline DebugInfo *GetGlobalDebugInfo()
 {
-    return g_DebugInfo;
+    return &g_DebugInfo;
 }
 
 void SetupImGui();
 void ShutdownImGui();
-void RenderImGuiViews();
+void RenderImGui();
+
+#endif

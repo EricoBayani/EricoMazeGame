@@ -16,8 +16,8 @@ struct WorldObject
     int worldX;
     int worldY; // I think it'd be good to have cell's know where they are in the world
 
-    WorldObject() {};
     WorldObject( World *world, float x, float y );
+    WorldObject() = default;
 }; 
 
 void RenderWorldCells( const std::vector<WorldObject> &cells );

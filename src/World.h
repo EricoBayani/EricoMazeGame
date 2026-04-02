@@ -42,8 +42,8 @@ class World
 
     bool m_worldLoaded = false;
 
-    uint32_t m_worldWidth = 40;
-    uint32_t m_worldHeight = 30;
+    int m_worldWidth = 40;
+    int m_worldHeight = 30;
 
     std::vector<WorldObject> m_worldCellObjects; 
 

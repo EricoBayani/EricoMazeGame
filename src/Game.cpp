@@ -44,8 +44,11 @@ bool MyGame::RenderFunc()
     int primsDrawn = 0;
     GetGame()->m_hge->Gfx_StartBatch( HGEPRIM_QUADS, 0, hgeBlendMode::BLEND_DEFAULT, &primsDrawn );
 
-    RenderImGuiViews();
+#ifdef _DEBUG
 
+    RenderImGui();
+
+#endif
     GetGame()->m_hge->Gfx_EndScene();
 
     return false;
@@ -77,9 +80,12 @@ bool MyGame::Startup()
 
     if ( !m_hge->System_Initiate() )
         return false;
+#ifdef _DEBUG
+
 
     SetupImGui();
 
+#endif
     m_font = new hgeFont( "font1.fnt" );
 
 
@@ -94,16 +100,16 @@ bool MyGame::Startup()
 
 void MyGame::Shutdown()
 {
+    // Clean up and shutdown
 
     delete m_state_play;
 
     delete m_font;
-
-    // Clean up and shutdown
+#ifdef _DEBUG
 
     ShutdownImGui();
 
-
+#endif
     m_hge->System_Shutdown();
     m_hge->Release();
 }

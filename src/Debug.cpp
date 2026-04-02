@@ -11,10 +11,10 @@
 
 // TODO: Figure out how to make cmake define preprocessor stuff so that I can wrap this body of these functions around #define blocks
 
+#ifdef _DEBUG
 
 void SetupImGui()
 {
-#ifdef _DEBUG
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO &io = ImGui::GetIO();
@@ -25,28 +25,36 @@ void SetupImGui()
     ImGui_ImplWin32_Init( MyGame::GetGame()->m_hge->System_GetState( HGE_HWND ) );
     ImGui_ImplDX9_Init( MyGame::GetGame()->m_hge->GetGAPIDevice() );
     ImGui::StyleColorsDark();
-#endif
 }
 
 void ShutdownImGui()
 {
-#ifdef _DEBUG
 
     ImGui_ImplDX9_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
-#endif
 }
 
 
-void RenderImGuiViews()
+static void RenderDebugControls()
 {
-#ifdef _DEBUG
-    ImGui_ImplDX9_NewFrame();
-    ImGui_ImplWin32_NewFrame();
-    ImGui::NewFrame();
 
-    const DebugInfo &debugInfo = GetGlobalDebugInfo();
+    if (!ImGui::CollapsingHeader("Debug Controls"))
+    {
+        return;
+    }
+
+    DebugInfo *debugInfo = GetGlobalDebugInfo();
+
+    debugInfo->fogEnabled ^= ImGui::Button( "Toggle Fog" );
+
+    ImGui::Text( debugInfo->fogEnabled ? "Fog" : "No Fog" );
+}
+
+
+static void RenderImguiViews()
+{
+    DebugInfo *debugInfo = GetGlobalDebugInfo();
 
     // Draw framerate and time since previous frame
 
@@ -56,14 +64,30 @@ void RenderImGuiViews()
 
     ImGui::Separator();
 
-    ImGui::Text( "Player x: %.3f\nPlayer y: %.3f\n", debugInfo.playerPos.x1, debugInfo.playerPos.y1 );
+    ImGui::Text( "Player x: %.3f\nPlayer y: %.3f\n", debugInfo->playerPos.x1, debugInfo->playerPos.y1 );
 
-    ImGui::Text( "frameDeltaSpikes: %d", debugInfo.frameDeltaSpikes );
+    ImGui::Text( "frameDeltaSpikes: %d", debugInfo->frameDeltaSpikes );
+
+    RenderDebugControls();
+
 
     ImGui::End();
+
+    ImGui::ShowDemoWindow();
+}
+
+
+void RenderImGui()
+{
+    ImGui_ImplDX9_NewFrame();
+    ImGui_ImplWin32_NewFrame();
+    ImGui::NewFrame();
+
+    RenderImguiViews();
 
     ImGui::EndFrame();
     ImGui::Render();
     ImGui_ImplDX9_RenderDrawData( ImGui::GetDrawData() );
-#endif
 }
+
+#endif
