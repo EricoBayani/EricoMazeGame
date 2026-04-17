@@ -10,7 +10,7 @@
 #include <hgesprite.h>
 
 World::World( Player *plr )
-    : m_player( plr ), m_pauseFlag( false ),
+    : m_player( plr ), m_fog(), m_pauseFlag( false ),
       m_levelGoalReached( false )
 {
 
@@ -73,9 +73,11 @@ void World::LoadWorld()
     {
         for ( int col = 0; col < m_worldWidth; ++col )
         {
-            m_worldCellObjects[row * m_worldWidth + col].celltype = m_worldCells[row][col];
+            m_worldCellObjects[row * m_worldWidth + col].m_celltype = m_worldCells[row][col];
         }
     }
+
+    m_fog.Init( this );
 
     m_worldLoaded = true;
 }
@@ -117,7 +119,9 @@ void World::Render()
 
     // feels very wasteful to pass a big array where cells are empty
     // I should compare versus array of ptrs of stucts
-    RenderWorldCells( m_worldCellObjects );
+    RenderWorldCells( this );
+
+    m_fog.Render();
 }
 
 SquareCollisionResult World::TestBlockCollisionAt( const hgeRect &rc )
@@ -127,7 +131,7 @@ SquareCollisionResult World::TestBlockCollisionAt( const hgeRect &rc )
     hgeVector collisionDist(0.0f, 0.0f);
     if ( IsSolidAtXY( rc.x1, rc.y1 ) )
     {
-        hgeRect collidedBox = WorldObjectAt( rc.y1, rc.x1 ).pos;
+        hgeRect collidedBox = WorldObjectAt( rc.y1, rc.x1 ).m_pos;
         collisionDist.x = std::max<float>( -1.0f * abs( rc.x1 - collidedBox.x1 ), -1.0f * abs( rc.x1 - collidedBox.x2 ) ) - 1.0f;
         collisionDist.y = std::max<float>( -1.0f * abs( rc.y1 - collidedBox.y1 ), -1.0f * abs( rc.y1 - collidedBox.y2 ) ) - 1.0f;
 
@@ -135,7 +139,7 @@ SquareCollisionResult World::TestBlockCollisionAt( const hgeRect &rc )
     }
     if ( IsSolidAtXY( rc.x1, rc.y2 ) )
     {
-        hgeRect collidedBox = WorldObjectAt( rc.y2, rc.x1 ).pos;
+        hgeRect collidedBox = WorldObjectAt( rc.y2, rc.x1 ).m_pos;
         collisionDist.x = std::max<float>( -1.0f * abs( rc.x1 - collidedBox.x1 ), -1.0f * abs( rc.x1 - collidedBox.x2 ) ) - 1.0f;
         collisionDist.y = std::max<float>( -1.0f * abs( rc.y2 - collidedBox.y1 ), -1.0f * abs( rc.y2 - collidedBox.y2 ) ) - 1.0f;
 
@@ -143,14 +147,14 @@ SquareCollisionResult World::TestBlockCollisionAt( const hgeRect &rc )
     }
     if ( IsSolidAtXY( rc.x2, rc.y1 ) )
     {
-        hgeRect collidedBox = WorldObjectAt( rc.y1, rc.x2 ).pos;
+        hgeRect collidedBox = WorldObjectAt( rc.y1, rc.x2 ).m_pos;
         collisionDist.x = std::max<float>( -1.0f * abs( rc.x2 - collidedBox.x2 ), -1.0f * abs( rc.x2 - collidedBox.x1 ) ) - 1.0f;
         collisionDist.y = std::max<float>( -1.0f * abs( rc.y1 - collidedBox.y1 ), -1.0f * abs( rc.y1 - collidedBox.y2 ) ) - 1.0f;
         return { false, collisionDist };
     }
     if ( IsSolidAtXY( rc.x2, rc.y2 ) )
     {
-        hgeRect collidedBox = WorldObjectAt( rc.y2, rc.x2 ).pos;
+        hgeRect collidedBox = WorldObjectAt( rc.y2, rc.x2 ).m_pos;
         collisionDist.x = std::max<float>( -1.0f * abs( rc.x2 - collidedBox.x2 ), -1.0f * abs( rc.x2 - collidedBox.x1 ) ) - 1.0f;
         collisionDist.y = std::max<float>( -1.0f * abs( rc.y2 - collidedBox.y1 ), -1.0f * abs( rc.y2 - collidedBox.y2 ) ) - 1.0f;
         return { false, collisionDist };

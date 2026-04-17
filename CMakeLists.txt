@@ -10,7 +10,7 @@ endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/ CACHE PATH "Single Directory for all executables.")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/bin/ CACHE PATH "Single Directory for all executables.")
-SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/linklib CACHE PATH "Single Directory for all static libraries.")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/linklib CACHE PATH "Single Directory for all static libraries.")
 
 set(HGE_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/libs/include")
 

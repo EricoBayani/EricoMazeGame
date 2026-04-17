@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <list>
@@ -10,42 +9,31 @@
 #include <hgevector.h>
 
 #include <cstdint>
-
 #include <crtdbg.h>
+
+#include "WorldObject.h"
 
 class Player;
 
 class hgeSprite;
 
-struct WorldObject;
-
-typedef uint32_t CellType;
 typedef std::vector<WorldObject *> WorldObjectList;
 typedef std::pair<bool, hgeVector> SquareCollisionResult;
-
-enum ECellType : CellType
-{
-    WORLD_CELL_EMPTY = ' ',
-    WORLD_CELL_PLAYER_START = '@',
-    WORLD_CELL_WALL1 = '#',
-    WORLD_CELL_SPIKES = '^',
-    WORLD_CELL_GOAL = '!',
-    WORLD_CELL_ENEMY1 = 'A'
-};
-
 
 class World
 {
   protected:
+    WorldFog m_fog;
 
     Player *m_player;
+
 
     bool m_worldLoaded = false;
 
     int m_worldWidth = 40;
     int m_worldHeight = 30;
 
-    std::vector<WorldObject> m_worldCellObjects; 
+    std::vector<WorldObject> m_worldCellObjects;
 
     CellType m_worldCells[30][40] = { WORLD_CELL_EMPTY };
 
@@ -65,12 +53,12 @@ class World
 
     static const int TARGET_SCREEN_WIDTH = 800;
     static const int TARGET_SCREEN_HEIGHT = 600;
-    
+
     float m_targetResToActualResScale = 1.0;
 
   public:
-
     World( Player *plr );
+    World() = default;
 
     virtual ~World();
 
@@ -117,6 +105,11 @@ class World
     void RemoveObject( WorldObject *o );
 
     virtual void GoalReached();
+
+    inline const std::vector<WorldObject>& GetWorldCellObjects()
+    {
+        return m_worldCellObjects;
+    }
 };
 
 class WorldType1 : virtual public World

@@ -14,13 +14,15 @@
 const static hgeVector g_defaultPlayerStart = hgeVector( 300, 300 );
 
 Player::Player()
-    : m_lives( INITIAL_LIVES_COUNT ), m_position( 0, 0, 0, 0 ),
-      m_speed( 0, 0 ), m_is_dead( false )
+    : m_playerBox(), m_position( 0, 0, 0, 0 ), m_speed( 0, 0 ), 
+       m_world( nullptr ), m_is_dead( false ), m_lives( INITIAL_LIVES_COUNT )
 {
     m_game = MyGame::GetGame();
     // this will not create another HGE, instead we will get the global
     // unique HGE object which is already started
     m_hge = hgeCreate( HGE_VERSION );
+
+    m_playerBox.blend = BLEND_DEFAULT_Z;
 }
 
 
@@ -172,6 +174,7 @@ void Player::Render( World *world )
 
     int screenWidth = m_hge->System_GetState( HGE_SCREENWIDTH );
 
+    // TODO: Move this font print and logic outside of player class. 
     // print with white shadow
     game->m_font->SetScale( m_world->m_targetResToActualResScale );
     game->m_font->SetBlendMode( BLEND_DEFAULT_Z );
@@ -187,20 +190,26 @@ void Player::Render( World *world )
 
     hgeColor32 blue( 0xFF0000FF );
 
-    hgeVertex p1 = { pos.x1, pos.y1, 1.0f, blue.argb, 0.0f, 0.0f };
-    hgeVertex p2 = { pos.x2, pos.y1, 1.0f, blue.argb, 0.0f, 0.0f };
-    hgeVertex p3 = { pos.x2, pos.y2, 1.0f, blue.argb, 0.0f, 0.0f };
-    hgeVertex p4 = { pos.x1, pos.y2, 1.0f, blue.argb, 0.0f, 0.0f };
+    hgeVertex p1 = { pos.x1, pos.y1, m_zLayer, blue.argb, 0.0f, 0.0f };
+    hgeVertex p2 = { pos.x2, pos.y1, m_zLayer, blue.argb, 0.0f, 0.0f };
+    hgeVertex p3 = { pos.x2, pos.y2, m_zLayer, blue.argb, 0.0f, 0.0f };
+    hgeVertex p4 = { pos.x1, pos.y2, m_zLayer, blue.argb, 0.0f, 0.0f };
 
-    hgeQuad playerBox = { { p1, p2, p3, p4 }, 0, BLEND_DEFAULT_Z };
+    // m_playerBox = { { p1, p2, p3, p4 }, 0, BLEND_DEFAULT_Z };
+    m_playerBox.v[0] = p1;
+    m_playerBox.v[1] = p2;
+    m_playerBox.v[2] = p3;
+    m_playerBox.v[3] = p4;
 
-    m_hge->Gfx_RenderQuad( &playerBox );
+    // m_hge->Gfx_SetShader( m_shader );
+    m_hge->Gfx_RenderQuad( &m_playerBox );
+    // m_hge->Gfx_SetShader( NULL );
 
 
-    MyGame::GetGame()->m_hge->Gfx_RenderLine( pos.x1, pos.y1, pos.x2, pos.y1, hgeColor32::WHITE().argb, 1.0f );
-    MyGame::GetGame()->m_hge->Gfx_RenderLine( pos.x2, pos.y1, pos.x2, pos.y2, hgeColor32::WHITE().argb, 1.0f );
-    MyGame::GetGame()->m_hge->Gfx_RenderLine( pos.x2, pos.y2, pos.x1, pos.y2, hgeColor32::WHITE().argb, 1.0f );
-    MyGame::GetGame()->m_hge->Gfx_RenderLine( pos.x1, pos.y1, pos.x1, pos.y2, hgeColor32::WHITE().argb, 1.0f );
+    MyGame::GetGame()->m_hge->Gfx_RenderLine( pos.x1, pos.y1, pos.x2, pos.y1, hgeColor32::WHITE().argb, m_zLayer );
+    MyGame::GetGame()->m_hge->Gfx_RenderLine( pos.x2, pos.y1, pos.x2, pos.y2, hgeColor32::WHITE().argb, m_zLayer );
+    MyGame::GetGame()->m_hge->Gfx_RenderLine( pos.x2, pos.y2, pos.x1, pos.y2, hgeColor32::WHITE().argb, m_zLayer );
+    MyGame::GetGame()->m_hge->Gfx_RenderLine( pos.x1, pos.y1, pos.x1, pos.y2, hgeColor32::WHITE().argb, m_zLayer );
 
 }
 

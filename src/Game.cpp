@@ -87,7 +87,7 @@ bool MyGame::Startup()
 
 #endif
     m_font = new hgeFont( "font1.fnt" );
-
+    m_font->SetZ( 0.0f );
 
 
 

@@ -8,7 +8,7 @@
 
 #include "Debug.h"
 #include "Game.h"
-
+#include "WorldObject.h"
 // TODO: Figure out how to make cmake define preprocessor stuff so that I can wrap this body of these functions around #define blocks
 
 #ifdef _DEBUG
@@ -47,7 +47,7 @@ static void RenderDebugControls()
     DebugInfo *debugInfo = GetGlobalDebugInfo();
 
     debugInfo->fogEnabled ^= ImGui::Button( "Toggle Fog" );
-
+    debugInfo->fog->m_enabled = debugInfo->fogEnabled;
     ImGui::Text( debugInfo->fogEnabled ? "Fog" : "No Fog" );
 }
 

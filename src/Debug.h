@@ -5,11 +5,13 @@
 
 #ifdef _DEBUG
 
+struct WorldFog;
 
 // Fill this up before imgui prints it
 struct DebugInfo
 {
     hgeRect playerPos;
+    WorldFog *fog;
     int frameDeltaSpikes = 0;
     bool fogEnabled = true;
 };

@@ -19,4 +19,4 @@ target_include_directories(imgui PRIVATE ${PROJECT_SOURCE_DIR}/libs/imgui
                                          ${DIRECTX_SDK_DIR}/include
                                          )
 # target_link_libraries(imgui PRIVATE ${DIRECTX_SDK_DIR}/Lib/x86/d3dx9.lib ${DIRECTX_SDK_DIR}/Lib/x86/d3d9.lib)
-target_link_libraries(imgui PRIVATE ${DIRECTX_SDK_DIR}/Lib/x64/d3dx9.lib ${DIRECTX_SDK_DIR}/Lib/x64/d3d9.lib)
+target_link_libraries(imgui PRIVATE ${DIRECTX_SDK_DIR}/Lib/x64/d3d9.lib debug ${DIRECTX_SDK_DIR}/Lib/x64/d3dx9d.lib optimized ${DIRECTX_SDK_DIR}/Lib/x64/d3dx9.lib )

@@ -14,10 +14,10 @@
 //
 
 // FIXME: Won't compile in 64-bit mode due to handles (4 bytes) holding a pointer (8 bytes)
-using HTEXTURE = size_t;
-using HTARGET = size_t;
-using HSHADER = size_t;
-using HEFFECT = size_t;
+using HTEXTURE = uintptr_t;
+using HTARGET = uintptr_t;
+using HSHADER = uintptr_t;
+using HEFFECT = uintptr_t;
 
 
 // Fix these when I enable sound

@@ -1124,19 +1124,26 @@ namespace hgeImpl {
     HSHADER HGE_CALL HGE_Impl::Shader_Create(const char *filename) {
       LPD3DXBUFFER code = nullptr;
       LPDIRECT3DPIXELSHADER9 pixelShader = nullptr;
-
+      LPD3DXBUFFER errorBuffer = nullptr;
       auto result = D3DXCompileShaderFromFile(
               filename, nullptr, //macro's
               nullptr, //includes
               "ps_main", //main function
               "ps_2_0", //shader profile
-              0, //flags
+              D3DXSHADER_DEBUG,  // flags
               &code, //compiled operations
-              nullptr, //errors
+              //nullptr, //errors
+              &errorBuffer,  
               nullptr); //constants
 
       if (FAILED(result)) {
-        post_error("Can't create shader");
+          post_error( "Can't create shader" );
+
+          if (errorBuffer)
+          {
+              std::string errorString( static_cast<char*>(errorBuffer->GetBufferPointer()), errorBuffer->GetBufferSize() );
+              post_error( errorString.c_str() );
+          }
         return NULL;
       }
 
